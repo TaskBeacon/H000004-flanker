@@ -79,10 +79,24 @@ export function run_trial(
     })
     .to_dict();
 
-  trial
-    .unit("iti")
-    .show({ duration: (settings.iti_duration as number | number[] | null | undefined) ?? null })
-    .to_dict();
+  const itiUnit = trial.unit("iti");
+  set_trial_context(itiUnit, {
+    trial_id: trial.trial_id,
+    phase: "iti",
+    deadline_s: (settings.iti_duration as number | number[] | null | undefined) ?? null,
+    valid_keys: [],
+    block_id,
+    condition_id,
+    task_factors: {
+      condition: condition_id,
+      stage: "iti",
+      flanker_type,
+      target_direction,
+      block_idx
+    },
+    stim_id: "blank_iti"
+  });
+  itiUnit.show({ duration: (settings.iti_duration as number | number[] | null | undefined) ?? null }).to_dict();
 
   return trial;
 }
