@@ -68,7 +68,7 @@ export function run_trial(
   stimulusUnit
     .captureResponse({
       keys: key_list,
-      correct_keys: correct_response,
+      correct_keys: [correct_response],
       duration: Number(settings.stim_duration ?? 1),
       response_trigger: {
         [left_key]: Number(trigger_map.left_key_press ?? 30),
